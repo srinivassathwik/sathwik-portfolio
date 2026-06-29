@@ -1,0 +1,115 @@
+.philosophy-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.phil-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(212,175,55,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.phil-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 5rem;
+}
+
+.phil-header .section-label {
+  justify-content: center;
+}
+
+.phil-header .section-label::before { display: none; }
+
+.phil-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.phil-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── Grid ───────────────────────────────────────────────── */
+.phil-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* ── Card ───────────────────────────────────────────────── */
+.phil-card {
+  position: relative;
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  transition: border-color 0.4s ease;
+}
+
+.phil-card:hover {
+  border-color: rgba(212,175,55,0.25);
+}
+
+.phil-card:hover .phil-card-glow {
+  opacity: 1;
+}
+
+.phil-card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.06) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.phil-icon {
+  font-size: 1.25rem;
+  color: var(--accent-gold);
+  margin-bottom: 0.75rem;
+  opacity: 0.7;
+}
+
+.phil-quote-mark {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 0.5;
+  color: rgba(212,175,55,0.15);
+  margin-bottom: 0.75rem;
+  font-weight: 800;
+}
+
+.phil-quote {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.phil-detail {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+@media (max-width: 900px) {
+  .phil-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .phil-grid { grid-template-columns: 1fr; }
+}

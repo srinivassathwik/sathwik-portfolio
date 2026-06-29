@@ -1,0 +1,85 @@
+.wa-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(6px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+}
+
+.wa-modal{
+    width:95%;
+    max-width:520px;
+    background:#111827;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:30px;
+    position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+.wa-modal h2{
+    margin:0;
+    color:#fff;
+    font-size:28px;
+}
+
+.wa-modal p{
+    margin-top:10px;
+    color:#a1a1aa;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+.wa-modal form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.wa-modal input,
+.wa-modal textarea{
+    width:100%;
+    padding:14px 16px;
+    border-radius:12px;
+    border:none;
+    outline:none;
+    background:#1f2937;
+    color:#fff;
+    font-size:15px;
+}
+
+.wa-modal textarea{
+    resize:vertical;
+    min-height:120px;
+}
+
+.wa-send{
+    margin-top:8px;
+    border:none;
+    padding:15px;
+    border-radius:12px;
+    background:#25D366;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.wa-send:hover{
+    transform:translateY(-2px);
+}
+
+.wa-close{
+    position:absolute;
+    right:18px;
+    top:18px;
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:22px;
+    cursor:pointer;
+}

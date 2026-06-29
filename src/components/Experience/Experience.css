@@ -1,0 +1,190 @@
+.experience-section {
+  background: var(--bg-secondary);
+}
+
+.exp-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 1rem 0 3.5rem;
+}
+
+.exp-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* ── Experience card ─────────────────────────────────────── */
+.exp-card {
+  padding: 2.5rem;
+}
+
+.exp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.exp-role {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.exp-company {
+  font-size: 1rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.exp-meta {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.meta-sep { opacity: 0.4; }
+
+.exp-period {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-pill);
+}
+
+/* Achievements */
+.exp-achievements {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+.exp-achievement {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.ach-marker {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 0.55rem;
+}
+
+/* Tech stack */
+.exp-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-pill {
+  padding: 0.25rem 0.75rem;
+  background: rgba(56,189,248,0.07);
+  border: 1px solid rgba(56,189,248,0.2);
+  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+/* ── Certifications ──────────────────────────────────────── */
+.cert-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 2rem;
+}
+
+.cert-header {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-card);
+  padding-bottom: 0.75rem;
+}
+
+.cert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.cert-item {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+}
+
+.cert-icon {
+  color: var(--accent-gold);
+  font-size: 0.75rem;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.cert-name {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 0.2rem;
+}
+
+.cert-meta {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Languages */
+.lang-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.lang-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lang-name {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.lang-level {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  padding: 2px 8px;
+  border: 1px solid rgba(56,189,248,0.2);
+  border-radius: var(--radius-pill);
+}
+
+@media (max-width: 900px) {
+  .exp-layout { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,60 @@
+/* ============================================================
+   ADMIN BAR — floating login/status control
+   ============================================================ */
+.admin-bar {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.admin-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(12, 19, 34, 0.9);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  backdrop-filter: blur(8px);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  color: #94A3B8;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.admin-pill:hover {
+  color: #38BDF8;
+  border-color: rgba(56, 189, 248, 0.5);
+}
+
+.admin-pill--active {
+  color: #4ADE80;
+  border-color: rgba(74, 222, 128, 0.35);
+}
+
+.admin-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Login modal */
+.admin-login-modal {
+  background: #0c1322;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 360px;
+  padding: 1.75rem;
+}
+
+.admin-login-modal h3 {
+  color: #fff;
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
+}

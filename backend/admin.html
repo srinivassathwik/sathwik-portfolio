@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Sathwik Portfolio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0F172A;
+      color: #F8FAFC;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 2rem; padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(56,189,248,0.15);
+    }
+    h1 { font-size: 1.4rem; color: #38BDF8; letter-spacing: 0.05em; }
+    .login-wrap {
+      max-width: 400px; margin: 10vh auto;
+      background: #111827; border: 1px solid rgba(56,189,248,0.15);
+      border-radius: 16px; padding: 2rem;
+    }
+    .login-wrap h2 { margin-bottom: 1.5rem; color: #38BDF8; font-size: 1.1rem; }
+    input {
+      width: 100%; padding: 0.75rem 1rem; margin-bottom: 1rem;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; color: #F8FAFC; font-size: 0.9rem; outline: none;
+    }
+    input:focus { border-color: #38BDF8; }
+    button {
+      width: 100%; padding: 0.75rem; background: #38BDF8;
+      color: #0F172A; border: none; border-radius: 8px;
+      font-weight: 700; font-size: 0.9rem; cursor: pointer;
+    }
+    button:hover { background: #7DD3FC; }
+    .stats {
+      display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;
+    }
+    .stat {
+      background: #111827; border: 1px solid rgba(56,189,248,0.15);
+      border-radius: 12px; padding: 1rem 1.5rem; min-width: 140px;
+    }
+    .stat-num { font-size: 2rem; font-weight: 700; color: #38BDF8; }
+    .stat-label { font-size: 0.72rem; color: #64748B; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+    .msg-grid { display: flex; flex-direction: column; gap: 1rem; }
+    .msg-card {
+      background: #111827; border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px; padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .msg-card:hover { border-color: rgba(56,189,248,0.3); }
+    .msg-card.unread { border-left: 3px solid #38BDF8; }
+    .msg-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
+    .msg-from { font-weight: 600; font-size: 0.95rem; }
+    .msg-email { font-size: 0.78rem; color: #38BDF8; margin-top: 2px; }
+    .msg-time { font-size: 0.7rem; color: #64748B; font-family: monospace; }
+    .msg-subject { font-size: 0.8rem; color: #94A3B8; margin-bottom: 0.75rem; font-style: italic; }
+    .msg-body { font-size: 0.875rem; color: #CBD5E1; line-height: 1.75; white-space: pre-wrap; }
+    .badge-unread {
+      font-size: 0.6rem; padding: 2px 8px; border-radius: 999px;
+      background: rgba(56,189,248,0.1); color: #38BDF8;
+      border: 1px solid rgba(56,189,248,0.3); font-family: monospace;
+    }
+    .empty { text-align: center; color: #64748B; padding: 4rem; font-size: 0.9rem; }
+    .reload-btn {
+      width: auto; padding: 0.5rem 1.25rem; font-size: 0.8rem;
+      background: rgba(56,189,248,0.1); color: #38BDF8;
+      border: 1px solid rgba(56,189,248,0.3); border-radius: 8px;
+    }
+    #error-msg { color: #F87171; margin-top: 0.5rem; font-size: 0.82rem; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-wrap" id="login-screen">
+  <h2>🔒 Admin Access</h2>
+  <input type="password" id="admin-key" placeholder="Enter admin key" />
+  <p id="error-msg"></p>
+  <button onclick="login()">Enter</button>
+</div>
+
+<!-- DASHBOARD (hidden until login) -->
+<div id="dashboard" style="display:none">
+  <div class="header">
+    <h1>📬 Portfolio Messages</h1>
+    <button class="reload-btn" onclick="loadMessages()">↺ Refresh</button>
+  </div>
+  <div class="stats" id="stats-row"></div>
+  <div class="msg-grid" id="messages"></div>
+</div>
+
+<script>
+  const API = 'http://localhost:5000';
+  let adminKey = '';
+
+  function login() {
+    adminKey = document.getElementById('admin-key').value.trim();
+    if (!adminKey) return;
+    loadMessages();
+  }
+
+  document.getElementById('admin-key').addEventListener('keydown', e => {
+    if (e.key === 'Enter') login();
+  });
+
+  async function loadMessages() {
+    try {
+      const res  = await fetch(`${API}/api/admin/messages?key=${adminKey}`);
+      const data = await res.json();
+
+      if (!data.success) {
+        document.getElementById('error-msg').textContent = '✗ Wrong key. Try again.';
+        return;
+      }
+
+      // Show dashboard
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+
+      // Load stats
+      const statsRes  = await fetch(`${API}/api/stats`);
+      const statsData = await statsRes.json();
+      renderStats(statsData.stats, data.messages.length);
+
+      // Render messages
+      renderMessages(data.messages);
+
+    } catch (e) {
+      document.getElementById('error-msg').textContent = '✗ Could not connect to backend.';
+    }
+  }
+
+  function renderStats(stats, total) {
+    const unread = stats.unread_messages ?? 0;
+    const downloads = stats.resume_download ?? 0;
+    document.getElementById('stats-row').innerHTML = `
+      <div class="stat"><div class="stat-num">${total}</div><div class="stat-label">Total Messages</div></div>
+      <div class="stat"><div class="stat-num" style="color:#4ADE80">${unread}</div><div class="stat-label">Unread</div></div>
+      <div class="stat"><div class="stat-num" style="color:#D4AF37">${downloads}</div><div class="stat-label">Resume Downloads</div></div>
+    `;
+  }
+
+  function renderMessages(messages) {
+    const container = document.getElementById('messages');
+    if (!messages.length) {
+      container.innerHTML = '<div class="empty">No messages yet. Share your portfolio!</div>';
+      return;
+    }
+    container.innerHTML = messages.map(m => `
+      <div class="msg-card ${m.read ? '' : 'unread'}">
+        <div class="msg-header">
+          <div>
+            <div class="msg-from">${escape(m.name)} ${m.read ? '' : '<span class="badge-unread">NEW</span>'}</div>
+            <div class="msg-email"><a href="mailto:${escape(m.email)}" style="color:inherit">${escape(m.email)}</a></div>
+          </div>
+          <div class="msg-time">${m.created_at}</div>
+        </div>
+        ${m.subject ? `<div class="msg-subject">Re: ${escape(m.subject)}</div>` : ''}
+        <div class="msg-body">${escape(m.message)}</div>
+      </div>
+    `).join('');
+  }
+
+  function escape(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+</script>
+</body>
+</html>

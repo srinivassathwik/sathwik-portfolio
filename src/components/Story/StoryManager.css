@@ -1,0 +1,149 @@
+.story-manager-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(8px);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:999999;
+}
+
+.story-manager{
+
+    width:95%;
+    max-width:900px;
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:#111827;
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    padding:30px;
+
+    color:white;
+}
+
+.story-manager h2{
+
+    margin:0;
+
+    margin-bottom:25px;
+
+    font-size:28px;
+}
+
+.story-form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+    margin-bottom:30px;
+}
+
+.story-form input,
+.story-form textarea{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border-radius:10px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:#1f2937;
+
+    color:white;
+
+    font-size:15px;
+
+    box-sizing:border-box;
+}
+
+.story-form textarea{
+
+    resize:vertical;
+
+    min-height:120px;
+}
+
+.story-form button{
+
+    background:#0ea5e9;
+
+    color:white;
+
+    border:none;
+
+    padding:14px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+}
+
+.story-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+.story-table th{
+
+    text-align:left;
+
+    padding:14px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.story-table td{
+
+    padding:14px;
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.story-delete{
+
+    background:#ef4444;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 14px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+.story-delete:hover{
+
+    background:#dc2626;
+}
+.story-edit,
+.story-delete,
+.admin-add-btn,
+.edit-btn {
+    cursor: pointer !important;
+}
+
+.story-edit:hover {
+    opacity: .9;
+}

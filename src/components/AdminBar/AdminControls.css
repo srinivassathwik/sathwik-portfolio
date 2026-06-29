@@ -1,0 +1,39 @@
+.admin-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(56,189,248,0.1);
+  border: 1px dashed rgba(56,189,248,0.4);
+  color: #38BDF8;
+  border-radius: 10px;
+  padding: 0.7rem 1.2rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.admin-add-btn:hover {
+  background: rgba(56,189,248,0.18);
+  border-color: rgba(56,189,248,0.7);
+}
+
+.admin-edit-icon,
+.admin-delete-icon {
+  position: absolute;
+  top: 0.75rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+  z-index: 5;
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+  transition: transform 0.15s, opacity 0.2s;
+}
+.admin-edit-icon { right: 3rem; background: rgba(56,189,248,0.15); color: #38BDF8; }
+.admin-delete-icon { right: 0.75rem; background: rgba(244,114,182,0.15); color: #F472B6; }
+.admin-edit-icon:hover, .admin-delete-icon:hover { transform: scale(1.1); }
