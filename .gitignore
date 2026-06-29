@@ -1,0 +1,16 @@
+# Node
+node_modules/
+
+# Build output
+dist/
+
+# Python
+backend/__pycache__/
+*.pyc
+
+# Local database
+backend/portfolio.db
+
+# Environment files
+.env
+backend/.env
