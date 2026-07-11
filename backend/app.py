@@ -16,11 +16,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # ── Allow React frontend to talk to this backend ──────────
-CORS(app, origins=[
-    "http://localhost:5173",   # Vite dev server
-    "http://localhost:3000",   # Alternative
-    os.getenv("FRONTEND_URL", "")  # Production URL
-])
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # ── Initialize database on startup ────────────────────────
 init_db()
