@@ -61,7 +61,7 @@
   margin-top: 2.5rem;
   padding: 1.25rem 1.5rem;
   border-left: 2px solid var(--accent);
-  background: rgba(56,189,248,0.04);
+  background: rgba(var(--accent-rgb),0.04);
   border-radius: 0 8px 8px 0;
 }
 
@@ -130,7 +130,7 @@
 
 /* ── Code snippet ────────────────────────────────────────── */
 .about-code {
-  background: #0A1120;
+  background: var(--bg-secondary);
   border: 1px solid var(--border-card);
   border-radius: 12px;
   overflow: hidden;
@@ -177,11 +177,11 @@
 .indent    { padding-left: 1.2rem; }
 .indent2   { padding-left: 2.4rem; }
 
-.c-keyword { color: #818CF8; }
-.c-class   { color: #38BDF8; }
-.c-fn      { color: #A78BFA; }
+.c-keyword { color: var(--accent-secondary); }
+.c-class   { color: var(--accent); }
+.c-fn      { color: var(--accent-gold); }
 .c-str     { color: #4ADE80; }
-.c-attr    { color: #F8FAFC; }
+.c-attr    { color: var(--text-primary); }
 
 @media (max-width: 900px) {
   .about-grid {

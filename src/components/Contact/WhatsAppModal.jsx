@@ -89,7 +89,7 @@ onClose();
           ✕
         </button>
 
-        <h2>Contact via WhatsApp</h2>
+        <h2 className="font-display">Contact via WhatsApp</h2>
 
         <p>
           Fill in your details and I'll receive an email.

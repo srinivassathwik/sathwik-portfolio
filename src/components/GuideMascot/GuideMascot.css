@@ -1,0 +1,141 @@
+/* ============================================================
+   GUIDE MASCOT
+   ============================================================ */
+.guide-mascot-wrap {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 8500;
+  pointer-events: none;
+}
+
+.guide-mascot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
+  cursor: pointer;
+  animation: mascotPatrol 8s ease-in-out infinite;
+}
+
+@keyframes mascotPatrol {
+  0%, 8%   { transform: translateX(0); }
+  42%, 50% { transform: translateX(46px); }
+  92%, 100%{ transform: translateX(0); }
+}
+
+.guide-bubble {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  opacity: 0;
+  animation: mascotBubble 8s ease-in-out infinite;
+}
+
+@keyframes mascotBubble {
+  0%, 46%  { opacity: 0; transform: translateY(4px); }
+  54%, 86% { opacity: 1; transform: translateY(0); }
+  94%, 100%{ opacity: 0; }
+}
+
+.guide-shape {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  color: var(--accent);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.guide-mascot:hover .guide-shape {
+  border-color: var(--accent);
+  transform: scale(1.08);
+}
+
+/* Terminal: blinking cursor glyph */
+.mascot-cursor {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  animation: mascotCursorBlink 1s step-end infinite;
+}
+@keyframes mascotCursorBlink { 50% { opacity: 0.3; } }
+
+/* Kinetic: small gradient blob, hopping */
+.mascot-blob {
+  width: 20px;
+  height: 20px;
+  border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  animation: mascotHop 0.5s ease-in-out infinite alternate;
+}
+@keyframes mascotHop {
+  from { transform: translateY(0) scaleX(1); }
+  to   { transform: translateY(-5px) scaleX(0.92); }
+}
+
+/* Pearl: soft drifting glow orb */
+.mascot-orb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--text-primary), var(--accent) 70%);
+  box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.5);
+  animation: mascotDrift 2.4s ease-in-out infinite;
+}
+@keyframes mascotDrift {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-4px); }
+}
+
+/* Gotham: bat silhouette (the animal — see component comment) */
+.mascot-bat {
+  color: var(--text-primary);
+  animation: mascotWingbeat 0.35s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+@keyframes mascotWingbeat {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0.72); }
+}
+
+/* Voyage: paper boat, bobbing */
+.mascot-boat {
+  animation: mascotBob 1.3s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+}
+@keyframes mascotBob {
+  from { transform: rotate(-4deg); }
+  to   { transform: rotate(4deg); }
+}
+
+/* Hide on very small screens to avoid crowding content, and
+   respect reduced-motion preferences by freezing the patrol. */
+@media (max-width: 480px) {
+  .guide-mascot-wrap { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-mascot,
+  .guide-bubble,
+  .mascot-cursor,
+  .mascot-blob,
+  .mascot-orb,
+  .mascot-bat,
+  .mascot-boat {
+    animation: none;
+  }
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sathwik-portfolio-web.onrender.com/sitemap.xml

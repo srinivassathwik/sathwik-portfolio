@@ -7,64 +7,154 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Srinivas Sathwik Maddali | Software Developer & AI Engineer</title>
+    <title>Srinivas Sathwik Maddali | Software Developer & AI Engineer in Hyderabad</title>
 
+    <!-- Single, canonical meta description. (Previous version had two
+         conflicting <meta name="description"> tags — only the first
+         is ever read, the second was dead weight. Fixed.) -->
     <meta
       name="description"
-      content="Srinivas Sathwik Maddali — Software Developer, AI Automation Specialist & Prompt Engineer. Building intelligent systems with AI, Python, Automation, LLMs, Web Scraping, and Full Stack Development."
+      content="Srinivas Sathwik Maddali — Software Developer & AI Automation Specialist based in Hyderabad, India. Building intelligent systems with Python, LLMs, prompt engineering, automation, and full-stack development."
     />
 
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#0f172a" />
     <meta
       name="keywords"
-      content="Srinivas Sathwik Maddali, Aorzon Technologies, JD Resume AI, AI Engineer, Software Developer, Python Developer, React Developer, AI Automation, Prompt Engineering, LLM, Web Scraping, Portfolio"
+      content="Srinivas Sathwik Maddali, Sathwik Maddali, Aorzon Technologies, AI Engineer Hyderabad, Software Developer Hyderabad, Python Developer, React Developer, AI Automation, Prompt Engineering, LLM Engineer, Web Scraping, Freelance AI Developer India"
     />
 
     <meta name="author" content="Srinivas Sathwik Maddali" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
-    <meta name="robots" content="index, follow" />
+    <!-- Legacy geo meta tags — low ranking weight on their own, but
+         cheap, harmless, and still read by some local-search tools. -->
+    <meta name="geo.region" content="IN-TG" />
+    <meta name="geo.placename" content="Hyderabad" />
+
+    <!-- Canonical — update if you move to a custom domain -->
+    <link rel="canonical" href="https://sathwik-portfolio-web.onrender.com/" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Srinivas Sathwik Maddali | Software Developer & AI Engineer" />
-
     <meta
       property="og:description"
-      content="Software Developer & AI Automation Specialist building intelligent systems using Python, LLMs, Automation, and Full Stack Development."
+      content="Software Developer & AI Automation Specialist in Hyderabad, India, building intelligent systems with Python, LLMs, automation, and full-stack development."
     />
-
     <meta property="og:type" content="website" />
-
-    <!-- Change this after deployment -->
-    <meta property="og:url" content="https://your-domain.com" />
-
-    <!-- We'll create this image later -->
-    <meta property="og:image" content="/preview.png" />
+    <meta property="og:url" content="https://sathwik-portfolio-web.onrender.com/" />
+    <meta property="og:site_name" content="Srinivas Sathwik Maddali" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:image" content="https://sathwik-portfolio-web.onrender.com/preview.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Srinivas Sathwik Maddali — Software Developer & AI Engineer portfolio" />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-
-    <meta
-      name="twitter:title"
-      content="Srinivas Sathwik Maddali | Software Developer & AI Engineer"
-    />
-
+    <meta name="twitter:title" content="Srinivas Sathwik Maddali | Software Developer & AI Engineer" />
     <meta
       name="twitter:description"
-      content="Software Developer specializing in AI, Python, LLMs, Automation and Full Stack Development."
+      content="Software Developer & AI Automation Specialist in Hyderabad, India, building intelligent systems with Python, LLMs, and full-stack development."
     />
-    <meta
-      name="description"
-      content="Official portfolio of Srinivas Sathwik Maddali, Software Developer and AI Engineer at Aorzon Technologies. Experienced in AI Automation, Python, Prompt Engineering, LLMs, Web Scraping, Full Stack Development, JD Resume AI, intelligent systems, and scalable software."
-    />
-    <meta name="twitter:image" content="/preview.png" />
+    <meta name="twitter:image" content="https://sathwik-portfolio-web.onrender.com/preview.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+    <!-- All 5 themes' display fonts load upfront (not per-theme) so
+         swapping themes never shows a flash of fallback font while a
+         family loads. Outfit (body) and JetBrains Mono (code/labels)
+         are shared across every theme. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=Newsreader:ital,wght@0,500;0,600;1,500;1,600&family=Archivo+Black&family=Baloo+2:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
+
+    <!-- ============================================================
+         THEME SELECTION — runs synchronously, before first paint,
+         so there's never a flash of the wrong theme. Priority:
+         1. ?theme=NAME in the URL (for sharing/demoing a specific one)
+         2. Otherwise, a random pick from the 5 themes every visit.
+         The actual color/font values live in src/styles/themes.css
+         as [data-theme="..."] blocks; this script only decides WHICH
+         one applies. See src/context/ThemeContext.jsx for the React
+         side (lets components read/change it after mount). -->
+    <script>
+      (function () {
+        var THEMES = ['terminal', 'kinetic', 'pearl', 'gotham', 'voyage'];
+        var BG_COLORS = {
+          terminal: '#0A0A0A',
+          kinetic:  '#0D0A1A',
+          pearl:    '#17130F',
+          gotham:   '#060607',
+          voyage:   '#0B1F2A',
+        };
+        var params = new URLSearchParams(window.location.search);
+        var requested = params.get('theme');
+        var theme = THEMES.indexOf(requested) !== -1
+          ? requested
+          : THEMES[Math.floor(Math.random() * THEMES.length)];
+        document.documentElement.setAttribute('data-theme', theme);
+        var themeColorTag = document.querySelector('meta[name="theme-color"]');
+        if (themeColorTag) themeColorTag.setAttribute('content', BG_COLORS[theme]);
+      })();
+    </script>
+
+    <!-- ============================================================
+         STRUCTURED DATA — identity layer (Person + WebSite).
+         This stays static/site-wide. Content-specific schema
+         (Services, FAQ) lives next to that content in the React
+         components themselves, so it can never drift out of sync
+         with what's actually visible on the page — see
+         src/components/Freelance/Freelance.jsx and
+         src/components/FAQ/FAQ.jsx.
+         ============================================================ -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://sathwik-portfolio-web.onrender.com/#person",
+            "name": "Srinivas Sathwik Maddali",
+            "alternateName": "Sathwik Maddali",
+            "url": "https://sathwik-portfolio-web.onrender.com/",
+            "image": "https://sathwik-portfolio-web.onrender.com/preview.jpg",
+            "jobTitle": "Software Developer & AI Engineer",
+            "description": "Software Developer and AI Automation Specialist building intelligent systems with Python, LLMs, and full-stack development.",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Aorzon Technologies"
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "addressCountry": "IN"
+            },
+            "email": "mailto:srinivassathwikmaddali@gmail.com",
+            "sameAs": [
+              "https://linkedin.com/in/srinivas-sathwik-maddali-3b9a32268",
+              "https://github.com/srinivassathwik"
+            ],
+            "knowsAbout": [
+              "Python", "Artificial Intelligence", "LLM Engineering",
+              "Prompt Engineering", "Automation", "Web Scraping",
+              "Full Stack Development", "React"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://sathwik-portfolio-web.onrender.com/#website",
+            "url": "https://sathwik-portfolio-web.onrender.com/",
+            "name": "Srinivas Sathwik Maddali — Portfolio",
+            "description": "Portfolio of Srinivas Sathwik Maddali, Software Developer and AI Automation Specialist in Hyderabad, India.",
+            "publisher": { "@id": "https://sathwik-portfolio-web.onrender.com/#person" },
+            "inLanguage": "en-IN"
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

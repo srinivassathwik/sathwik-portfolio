@@ -2,6 +2,31 @@
 
 A premium, cinematic personal portfolio built with React + Vite + Framer Motion.
 
+## 📖 Start here
+**`COMPLETE_SETUP_GUIDE.md`** — the full walkthrough from a fresh clone
+to a deployed site: Supabase project setup, every table and what it's
+for, admin login, contact form + email alerts, the 5-theme system, and
+a verification checklist. Read this first.
+
+## 📌 Recent updates
+- **5-theme system**: the site picks a random visual theme
+  (Terminal Precision / Kinetic / Hyderabad Pearl / Gotham / Voyage)
+  on every visit, or link a specific one with `?theme=name`. Switch
+  manually via the ⌘K command palette. See Part 8 of the setup guide.
+- **Contact form now runs on Supabase** (free, no server to host) —
+  see the setup guide. The old Flask backend in `backend/` is
+  deprecated (see `backend/DEPRECATED.md`).
+- **SEO/GEO/AEO overhaul** — see `SEO_GEO_AEO_STRATEGY.md` for the full
+  breakdown (on-page, technical, structured data, off-page, local,
+  content quality/E-E-A-T, and AI-answer-engine optimization).
+- **New UI systems**: magnetic cursor with hover labels, a muted-by-default
+  synthesized sound layer, 3D tilt on project cards, a ⌘K command palette,
+  and a theme-aware guide mascot.
+- **Test suite added**: `npm test` runs automated render/smoke tests
+  covering all 5 themes (vitest + jsdom + testing-library). `npm run lint`
+  runs ESLint (there was no config before this update, despite the
+  plugins being installed).
+
 ## 🚀 Quick Start
 
 ```bash

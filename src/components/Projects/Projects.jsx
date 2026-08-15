@@ -3,13 +3,17 @@
    Now backed by Supabase (with static fallback) + admin CRUD.
    ============================================================ */
 import { useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { projects as fallbackProjects } from '../../data/portfolioData';
 import { useContent } from '../../hooks/useContent';
 import { useAdmin } from '../../context/AdminContext';
 import EditModal from '../AdminBar/EditModal';
 import './Projects.css';
 import '../AdminBar/AdminControls.css';
+
+const isTouchDevice = () =>
+  typeof window !== 'undefined' &&
+  (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(max-width: 768px)').matches);
 
 // Normalize fallback static data (camelCase) to match DB shape (snake_case)
 const normalizedFallback = fallbackProjects.map((p, i) => ({
@@ -36,14 +40,52 @@ const PROJECT_FIELDS = [
 function ProjectCard({ project, index, inView, isAdmin, onEdit }) {
   const [expanded, setExpanded] = useState(false);
 
+  // ── 3D tilt (disabled on touch devices) ──────────────────
+  const cardRef = useRef(null);
+  const mvX = useMotionValue(0.5);
+  const mvY = useMotionValue(0.5);
+  const springX = useSpring(mvX, { stiffness: 200, damping: 22 });
+  const springY = useSpring(mvY, { stiffness: 200, damping: 22 });
+  const rotateX = useTransform(springY, [0, 1], [7, -7]);
+  const rotateY = useTransform(springX, [0, 1], [-7, 7]);
+  const glareX  = useTransform(springX, [0, 1], ['0%', '100%']);
+  const glareY  = useTransform(springY, [0, 1], ['0%', '100%']);
+
+  const handleMouseMove = (e) => {
+    if (isTouchDevice() || !cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    mvX.set((e.clientX - rect.left) / rect.width);
+    mvY.set((e.clientY - rect.top) / rect.height);
+  };
+  const handleMouseLeave = () => {
+    mvX.set(0.5);
+    mvY.set(0.5);
+  };
+
   return (
     <motion.div
+      ref={cardRef}
       className={`project-card ${project.featured ? 'featured' : ''}`}
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      style={{ '--project-color': project.color, position: 'relative' }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        '--project-color': project.color,
+        position: 'relative',
+        rotateX,
+        rotateY,
+        transformPerspective: 1200,
+      }}
     >
+      {/* Tilt glare */}
+      <motion.div
+        className="proj-tilt-glare"
+        style={{
+          background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.10), transparent 55%)`,
+        }}
+      />
       {isAdmin && (
         <div className="admin-edit-icon" onClick={() => onEdit(project)} title="Edit project">
           ✎

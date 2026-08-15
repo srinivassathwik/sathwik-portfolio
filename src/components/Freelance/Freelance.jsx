@@ -27,6 +27,33 @@ export default function Freelance() {
 
   const { items: freelanceServices, addItem, updateItem, deleteItem } = useContent('freelance_services', normalizedFallback);
 
+  // Service schema generated from the SAME array rendered below —
+  // guarantees the structured data can never drift from what's
+  // actually visible on the page.
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'AI Automation & Software Development',
+    provider: { '@id': 'https://sathwik-portfolio-web.onrender.com/#person' },
+    areaServed: 'Worldwide',
+    availableChannel: {
+      '@type': 'ServiceChannel',
+      serviceUrl: 'https://sathwik-portfolio-web.onrender.com/#contact',
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Freelance Services',
+      itemListElement: freelanceServices.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: s.title,
+          description: s.description,
+        },
+      })),
+    },
+  };
+
   const [editingService, setEditingService] = useState(null);
   const [adding, setAdding] = useState(false);
 
@@ -41,6 +68,11 @@ export default function Freelance() {
 
   return (
     <section className="section freelance-section" id="freelance" ref={ref}>
+      {/* Service structured data — derived from the live services array above */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <div className="container">
         <div className="freelance-layout">
 
@@ -113,7 +145,7 @@ export default function Freelance() {
                   </div>
                 )}
                 <div className="svc-icon">{svc.icon}</div>
-                <h3 className="svc-title">{svc.title}</h3>
+                <h3 className="svc-title font-display">{svc.title}</h3>
                 <p className="svc-desc">{svc.description}</p>
                 <ul className="svc-items">
                   {(svc.items || []).map(item => (

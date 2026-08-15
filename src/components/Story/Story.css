@@ -34,7 +34,7 @@
     to bottom,
     transparent 0%,
     var(--accent) 10%,
-    rgba(56,189,248,0.3) 90%,
+    rgba(var(--accent-rgb),0.3) 90%,
     transparent 100%
   );
   transform-origin: top center;

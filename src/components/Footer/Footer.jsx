@@ -1,7 +1,6 @@
 /* ============================================================
    FOOTER — Minimal, elegant footer
    ============================================================ */
-import { motion } from 'framer-motion';
 import { personal } from '../../data/portfolioData';
 import './Footer.css';
 

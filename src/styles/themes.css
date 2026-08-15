@@ -1,0 +1,316 @@
+/* ============================================================
+   THEMES — 5 complete visual identities, swapped via
+   [data-theme="..."] on <html>. Which one loads is decided by
+   the inline script in index.html (random per visit, or a
+   ?theme= URL override) — see ThemeContext.jsx for the JS side.
+
+   Every theme defines the SAME variable set, so every component
+   that already reads var(--accent) / var(--bg-primary) / etc.
+   re-themes automatically with zero component changes. Only a
+   few bespoke signature touches are added per theme below the
+   variable blocks.
+
+   --accent-gold is reused across themes as "the second special
+   accent" (badges, gradients, code-syntax highlight) — the name
+   is a holdover from the original single-theme site; it isn't
+   literally gold in every theme (it's phosphor-green in
+   Terminal, pink in Kinetic, etc).
+
+   Admin-only surfaces (EditModal, AdminBar, MessagesInbox,
+   StoryManager) intentionally do NOT use these variables — they
+   stay on a fixed neutral dark skin across all 5 themes, since
+   visitors never see them and a stable editing experience is
+   more useful to the site owner than a themed one.
+   ============================================================ */
+
+/* ── 1. Terminal Precision ─────────────────────────────────
+   Automation/systems-engineering mood. True near-black, warm
+   amber "terminal" accent, monospace promoted to display role,
+   sharp corners, ambient grid + scanline texture. */
+[data-theme="terminal"] {
+  --bg-primary:    #0A0A0A;
+  --bg-primary-rgb: 10, 10, 10;
+  --bg-secondary:  #101010;
+  --bg-card:       #131313;
+  --accent:        #FFB13D;
+  --accent-rgb:    255, 177, 61;
+  --accent-secondary: #FF8A3D;
+  --accent-glow:   rgba(255, 177, 61, 0.15);
+  --accent-gold:   #4ADE80;
+  --accent-gold-rgb: 74, 222, 128;
+  --gold-glow:     rgba(74, 222, 128, 0.12);
+  --text-primary:  #F2F2F0;
+  --text-secondary:#ABABA5;
+  --text-muted:    #6B6B66;
+  --border-subtle: rgba(255, 177, 61, 0.14);
+  --border-card:   rgba(255, 255, 255, 0.08);
+  --glass-bg:      rgba(10, 10, 10, 0.75);
+  --grid-line:     rgba(255, 255, 255, 0.045);
+  --font-display:  'JetBrains Mono', monospace;
+  --font-body:     'Outfit', sans-serif;
+  --font-mono:     'JetBrains Mono', monospace;
+  --heading-transform: none;
+  --heading-style: normal;
+  --radius-card:   6px;
+  --radius-pill:   6px;
+}
+
+/* ── 2. Kinetic ─────────────────────────────────────────────
+   Motion-first mood. Deep indigo, violet/cyan/pink trio used
+   meaningfully (not decoratively), fully rounded shapes. */
+[data-theme="kinetic"] {
+  --bg-primary:    #0D0A1A;
+  --bg-primary-rgb: 13, 10, 26;
+  --bg-secondary:  #120E22;
+  --bg-card:       #17122B;
+  --accent:        #8B5CF6;
+  --accent-rgb:    139, 92, 246;
+  --accent-secondary: #22D3EE;
+  --accent-glow:   rgba(139, 92, 246, 0.18);
+  --accent-gold:   #EC4899;
+  --accent-gold-rgb: 236, 72, 153;
+  --gold-glow:     rgba(236, 72, 153, 0.14);
+  --text-primary:  #F3F1FA;
+  --text-secondary:#B5AECF;
+  --text-muted:    #766F92;
+  --border-subtle: rgba(139, 92, 246, 0.16);
+  --border-card:   rgba(255, 255, 255, 0.08);
+  --glass-bg:      rgba(13, 10, 26, 0.7);
+  --grid-line:     rgba(139, 92, 246, 0.05);
+  --font-display:  'Space Grotesk', sans-serif;
+  --font-body:     'Outfit', sans-serif;
+  --font-mono:     'JetBrains Mono', monospace;
+  --heading-transform: none;
+  --heading-style: normal;
+  --radius-card:   18px;
+  --radius-pill:   999px;
+}
+
+/* ── 3. Hyderabad Pearl ─────────────────────────────────────
+   Warm, human, unhurried mood. Espresso-dark instead of cold
+   navy, pearl/mauve duotone, italic serif headlines. */
+[data-theme="pearl"] {
+  --bg-primary:    #17130F;
+  --bg-primary-rgb: 23, 19, 15;
+  --bg-secondary:  #1C1712;
+  --bg-card:       #221C16;
+  --accent:        #E8DFD3;
+  --accent-rgb:    232, 223, 211;
+  --accent-secondary: #D4C4A8;
+  --accent-glow:   rgba(232, 223, 211, 0.15);
+  --accent-gold:   #C9A9A6;
+  --accent-gold-rgb: 201, 169, 166;
+  --gold-glow:     rgba(201, 169, 166, 0.12);
+  --text-primary:  #EDE6DB;
+  --text-secondary:#B3A796;
+  --text-muted:    #7A6F5F;
+  --border-subtle: rgba(232, 223, 211, 0.16);
+  --border-card:   rgba(232, 223, 211, 0.10);
+  --glass-bg:      rgba(23, 19, 15, 0.7);
+  --grid-line:     rgba(232, 223, 211, 0.03);
+  --font-display:  'Newsreader', serif;
+  --font-body:     'Outfit', sans-serif;
+  --font-mono:     'JetBrains Mono', monospace;
+  --heading-transform: none;
+  --heading-style: italic;
+  --radius-card:   20px;
+  --radius-pill:   999px;
+}
+
+/* ── 4. Gotham ──────────────────────────────────────────────
+   Dark-vigilante-noir mood (inspired by, not branded as, any
+   franchise — original shapes/colors only, see GuideMascot).
+   True black, signal-yellow accent, condensed uppercase display
+   type, sharp clipped corners. */
+[data-theme="gotham"] {
+  --bg-primary:    #060607;
+  --bg-primary-rgb: 6, 6, 7;
+  --bg-secondary:  #0A0A0B;
+  --bg-card:       #101012;
+  --accent:        #F0C300;
+  --accent-rgb:    240, 195, 0;
+  --accent-secondary: #8A8A94;
+  --accent-glow:   rgba(240, 195, 0, 0.15);
+  --accent-gold:   #D4A600;
+  --accent-gold-rgb: 212, 166, 0;
+  --gold-glow:     rgba(212, 166, 0, 0.1);
+  --text-primary:  #EDEDEE;
+  --text-secondary:#9B9BA5;
+  --text-muted:    #5C5C66;
+  --border-subtle: rgba(240, 195, 0, 0.16);
+  --border-card:   rgba(240, 195, 0, 0.12);
+  --glass-bg:      rgba(6, 6, 7, 0.78);
+  --grid-line:     rgba(255, 255, 255, 0.035);
+  --font-display:  'Archivo Black', sans-serif;
+  --font-body:     'Outfit', sans-serif;
+  --font-mono:     'JetBrains Mono', monospace;
+  --heading-transform: uppercase;
+  --heading-style: normal;
+  --radius-card:   4px;
+  --radius-pill:   4px;
+}
+
+/* ── 5. Voyage ──────────────────────────────────────────────
+   High-seas adventure mood (inspired by, not branded as, any
+   franchise — original shapes/colors only, see GuideMascot).
+   Ocean-to-shore gradient base, gold/crimson duotone, bouncy
+   rounded display type. */
+[data-theme="voyage"] {
+  --bg-primary:    #0B1F2A;
+  --bg-primary-rgb: 11, 31, 42;
+  --bg-secondary:  #14313F;
+  --bg-card:       #16323f;
+  --accent:        #F2A93B;
+  --accent-rgb:    242, 169, 59;
+  --accent-secondary: #E8442C;
+  --accent-glow:   rgba(242, 169, 59, 0.18);
+  --accent-gold:   #C23A24;
+  --accent-gold-rgb: 194, 58, 36;
+  --gold-glow:     rgba(194, 58, 36, 0.14);
+  --text-primary:  #F4EFE4;
+  --text-secondary:#B8C7CC;
+  --text-muted:    #7C919A;
+  --border-subtle: rgba(242, 169, 59, 0.2);
+  --border-card:   rgba(242, 169, 59, 0.16);
+  --glass-bg:      rgba(11, 31, 42, 0.72);
+  --grid-line:     rgba(242, 169, 59, 0.045);
+  --font-display:  'Baloo 2', sans-serif;
+  --font-body:     'Outfit', sans-serif;
+  --font-mono:     'JetBrains Mono', monospace;
+  --heading-transform: none;
+  --heading-style: normal;
+  --radius-card:   18px;
+  --radius-pill:   999px;
+}
+
+/* ============================================================
+   SIGNATURE TOUCHES — small, additive, per-theme flourishes.
+   These only ADD rules on top of existing component styles;
+   nothing here removes or restructures a component.
+   ============================================================ */
+
+/* Gotham: clipped corner on primary cards, like a case-file tab */
+[data-theme="gotham"] .project-card,
+[data-theme="gotham"] .svc-card,
+[data-theme="gotham"] .card {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+}
+
+/* Voyage: dashed "bounty poster" border on primary cards */
+[data-theme="voyage"] .project-card,
+[data-theme="voyage"] .svc-card {
+  border-style: dashed;
+}
+
+/* Pearl: soft shimmering underline on the hero name, echoing
+   the pearl-luster signature from the approved preview */
+[data-theme="pearl"] .hero-name-accent {
+  position: relative;
+}
+[data-theme="pearl"] .hero-name-accent::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-gold), var(--accent), transparent);
+  background-size: 200% 100%;
+  animation: pearlShimmer 4s ease-in-out infinite;
+}
+@keyframes pearlShimmer {
+  0%, 100% { background-position: 0% 0; }
+  50%       { background-position: 100% 0; }
+}
+
+/* Terminal: blinking block cursor after the hero name */
+[data-theme="terminal"] .hero-name::after {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 0.85em;
+  background: var(--accent);
+  margin-left: 0.15em;
+  vertical-align: -0.1em;
+  animation: termBlink 1s step-end infinite;
+}
+@keyframes termBlink { 50% { opacity: 0; } }
+
+/* ============================================================
+   HERO SIGNATURE FLOURISH (.hero-theme-fx) — one per theme,
+   layered alongside the existing hero-canvas/hero-glow/hero-grid
+   decorative divs (see Hero.jsx). Purely additive/decorative,
+   pointer-events: none, sits behind hero content.
+   ============================================================ */
+.hero-theme-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Terminal: slow scanline sweep, echoing a CRT terminal */
+[data-theme="terminal"] .hero-theme-fx::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.35), transparent);
+  animation: scan-line 7s linear infinite;
+}
+
+/* Kinetic: morphing conic-gradient blob */
+[data-theme="kinetic"] .hero-theme-fx::before {
+  content: '';
+  position: absolute;
+  top: -10%; right: -8%;
+  width: 46vw;
+  height: 46vw;
+  max-width: 520px;
+  max-height: 520px;
+  background: conic-gradient(from 0deg, var(--accent), var(--accent-secondary), var(--accent-gold), var(--accent));
+  filter: blur(90px);
+  opacity: 0.28;
+  animation: kineticMorph 9s ease-in-out infinite;
+}
+@keyframes kineticMorph {
+  0%, 100% { border-radius: 42% 58% 65% 35% / 45% 45% 55% 55%; transform: rotate(0deg) scale(1); }
+  50%       { border-radius: 65% 35% 42% 58% / 55% 62% 38% 45%; transform: rotate(35deg) scale(1.08); }
+}
+
+/* Pearl: soft warm glow, upper right */
+[data-theme="pearl"] .hero-theme-fx::before {
+  content: '';
+  position: absolute;
+  top: -10%; right: -5%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.08), transparent 65%);
+}
+
+/* Gotham: sweeping searchlight beam over a night sky */
+[data-theme="gotham"] .hero-theme-fx::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  width: 34vw;
+  max-width: 420px;
+  height: 90vh;
+  background: conic-gradient(from 180deg at 50% 0%, transparent 78deg, rgba(var(--accent-rgb), 0.14) 90deg, transparent 102deg);
+  transform: translateX(-50%);
+  animation: gothamSweep 8s ease-in-out infinite;
+}
+@keyframes gothamSweep {
+  0%, 100% { transform: translateX(-50%) rotate(-14deg); }
+  50%       { transform: translateX(-50%) rotate(14deg); }
+}
+
+/* Voyage: warm horizon gradient wash at the base */
+[data-theme="voyage"] .hero-theme-fx::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 45%;
+  background: linear-gradient(180deg, transparent, rgba(var(--accent-gold-rgb), 0.10));
+}
+

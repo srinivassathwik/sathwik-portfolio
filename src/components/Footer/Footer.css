@@ -60,7 +60,7 @@
 }
 
 .footer-social:hover {
-  border-color: rgba(56,189,248,0.4);
+  border-color: rgba(var(--accent-rgb),0.4);
   color: var(--accent);
 }
 

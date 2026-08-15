@@ -7,7 +7,7 @@
 }
 
 .navbar--scrolled {
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(var(--bg-primary-rgb), 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-card);
@@ -86,6 +86,36 @@
 .navbar-link:hover .link-dot,
 .navbar-link.active .link-dot { opacity: 1; }
 
+/* ── Actions (sound toggle + CTA) ───────────────────────── */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar-cmdk {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+  padding: 0.4rem 0.7rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.navbar-cmdk:hover {
+  color: var(--accent);
+  border-color: rgba(var(--accent-rgb), 0.4);
+  background: rgba(var(--accent-rgb), 0.08);
+}
+
 /* ── CTA ─────────────────────────────────────────────────── */
 .navbar-cta {
   padding: 0.5rem 1.25rem;
@@ -127,7 +157,7 @@
 
 /* ── Mobile menu ─────────────────────────────────────────── */
 .navbar-mobile {
-  background: rgba(15, 23, 42, 0.98);
+  background: rgba(var(--bg-primary-rgb), 0.98);
   backdrop-filter: blur(20px);
   border-top: 1px solid var(--border-card);
   overflow: hidden;

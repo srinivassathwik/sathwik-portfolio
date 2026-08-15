@@ -1,6 +1,4 @@
 import EditModal from '../AdminBar/EditModal';
-import { useState } from 'react';
-import { uploadResume } from '../../hooks/useResumeUpload';
 import { useSiteSettingsContext } from '../../context/SiteSettingsContext';
 
 const HERO_FIELDS = [
@@ -72,40 +70,22 @@ export default function HeroEditor({ onClose }) {
     settings,
     updateSettings,
   } = useSiteSettingsContext();
-  const [resumeFile, setResumeFile] = useState(null);
-  const [uploading, setUploading] = useState(false);
+
   const handleSave = async (values) => {
-
     try {
+      const error = await updateSettings(values);
 
-        setUploading(true);
-
-        if (resumeFile) {
-        await uploadResume(resumeFile);
-        }
-
-        const error = await updateSettings(values);
-
-        if (error) {
+      if (error) {
         alert("Failed to save Hero.");
         return;
-        }
+      }
 
-        alert("Hero updated successfully!");
-
-        onClose();
-
+      alert("Hero updated successfully!");
+      onClose();
     } catch (err) {
-
-        alert(err.message);
-
-    } finally {
-
-        setUploading(false);
-
+      alert(err.message);
     }
-
-    };
+  };
 
 
 

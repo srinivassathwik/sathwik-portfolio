@@ -1,0 +1,133 @@
+/* ============================================================
+   COMMAND PALETTE
+   ============================================================ */
+.cmdk-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 16, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 10000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12vh 1.5rem 1.5rem;
+}
+
+.cmdk-panel {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(12, 19, 34, 0.96);
+  border: 1px solid rgba(var(--accent-rgb), 0.25);
+  border-radius: 14px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+}
+
+.cmdk-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cmdk-icon {
+  color: var(--accent, #38BDF8);
+  font-size: 1rem;
+}
+
+.cmdk-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: #F8FAFC;
+  font-size: 0.95rem;
+  font-family: var(--font-body, inherit);
+}
+
+.cmdk-input::placeholder { color: #64748B; }
+
+.cmdk-esc {
+  font-size: 0.65rem;
+  color: #64748B;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.cmdk-list {
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.cmdk-empty {
+  padding: 2rem;
+  text-align: center;
+  color: #64748B;
+  font-size: 0.85rem;
+}
+
+.cmdk-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.cmdk-item.active,
+.cmdk-item:hover {
+  background: rgba(var(--accent-rgb), 0.1);
+}
+
+.cmdk-item-label {
+  color: #F8FAFC;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.cmdk-item.active .cmdk-item-label,
+.cmdk-item:hover .cmdk-item-label {
+  color: var(--accent, #38BDF8);
+}
+
+.cmdk-item-hint {
+  color: #64748B;
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 45%;
+}
+
+.cmdk-footer {
+  display: flex;
+  gap: 1.25rem;
+  padding: 0.7rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.68rem;
+  color: #64748B;
+}
+
+.cmdk-footer kbd {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  padding: 1px 4px;
+  margin-right: 2px;
+  font-family: inherit;
+}
+
+@media (max-width: 640px) {
+  .cmdk-backdrop { padding: 6vh 1rem 1rem; }
+  .cmdk-item-hint { display: none; }
+}

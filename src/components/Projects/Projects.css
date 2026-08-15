@@ -43,12 +43,22 @@
   border-radius: var(--radius-card);
   padding: 2rem;
   overflow: hidden;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
 }
 
 .project-card:hover {
   border-color: color-mix(in srgb, var(--project-color) 35%, transparent);
-  transform: translateY(-4px);
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5);
+}
+
+/* 3D tilt glare — follows the cursor via CSS vars set inline (see JSX) */
+.proj-tilt-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
 }
 
 .project-card.featured {

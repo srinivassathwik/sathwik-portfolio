@@ -10,12 +10,14 @@
 import { useState } from 'react';
 import { useAdmin } from '../../context/AdminContext';
 import { isSupabaseConfigured } from '../../lib/supabaseClient';
+import MessagesInbox from './MessagesInbox';
 import './AdminBar.css';
 import './EditModal.css';
 
 export default function AdminBar() {
   const { isAdmin, loading, login, logout } = useAdmin();
   const [showLogin, setShowLogin] = useState(false);
+  const [showInbox, setShowInbox] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -42,10 +44,16 @@ export default function AdminBar() {
     <>
       <div className="admin-bar">
         {isAdmin ? (
-          <button className="admin-pill admin-pill--active" onClick={logout}>
-            <span className="admin-dot" />
-            Admin mode — Logout
-          </button>
+          <>
+            <button className="admin-pill" onClick={() => setShowInbox(true)}>
+              <span className="admin-dot" style={{ background: '#38BDF8' }} />
+              Messages
+            </button>
+            <button className="admin-pill admin-pill--active" onClick={logout}>
+              <span className="admin-dot" />
+              Admin mode — Logout
+            </button>
+          </>
         ) : (
           <button className="admin-pill" onClick={() => setShowLogin(true)}>
             <span className="admin-dot" />
@@ -80,6 +88,8 @@ export default function AdminBar() {
           </div>
         </div>
       )}
+
+      {showInbox && <MessagesInbox onClose={() => setShowInbox(false)} />}
     </>
   );
 }

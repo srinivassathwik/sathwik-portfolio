@@ -11,8 +11,6 @@ import EditModal from '../AdminBar/EditModal';
 import './Skills.css';
 import '../AdminBar/AdminControls.css';
 
-const CATEGORIES = ['All', 'AI', 'Language', 'Automation', 'Data', 'Framework', 'Platform', 'Mindset', 'Web', 'Database', 'Tool'];
-
 const categoryColors = {
   AI:         { bg: 'rgba(56,189,248,0.1)',  border: 'rgba(56,189,248,0.3)',  text: '#38BDF8' },
   Language:   { bg: 'rgba(129,140,248,0.1)', border: 'rgba(129,140,248,0.3)', text: '#818CF8' },

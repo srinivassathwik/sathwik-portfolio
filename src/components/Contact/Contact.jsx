@@ -1,17 +1,20 @@
 /* ============================================================
-   CONTACT — Connected to Flask backend
-   Sends form data → Flask API → Gmail + SQLite
+   CONTACT — Connected directly to Supabase
+   Form submits straight into the `messages` table (RLS lets
+   anyone insert, only the logged-in admin can read). A Postgres
+   trigger + Edge Function emails you instantly via Resend.
+   No backend server required, and it's free.
    ============================================================ */
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { personal } from '../../data/portfolioData';
 import { useSiteSettingsContext } from '../../context/SiteSettingsContext';
 import { useAdmin } from '../../context/AdminContext';
+import { useSoundContext } from '../../context/SoundContext';
+import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
 import WhatsAppModal from './WhatsAppModal';
 import ContactEditor from './ContactEditor';
 import './Contact.css';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const socialLinks = [
   {
@@ -53,6 +56,7 @@ export default function Contact() {
   const [showWhatsApp, setShowWhatsApp] = useState(false);
   const { settings } = useSiteSettingsContext();
   const { isAdmin } = useAdmin();
+  const { playSuccess } = useSoundContext();
   const [editing, setEditing] = useState(false);
 
   const showToast = (type, message) => {
@@ -73,21 +77,29 @@ export default function Contact() {
       return;
     }
     setStatus('sending');
+
+    if (!isSupabaseConfigured) {
+      setStatus('error');
+      showToast('error', 'Contact form is temporarily unavailable — please email me directly.');
+      setTimeout(() => setStatus('idle'), 3000);
+      return;
+    }
+
     try {
-      const res  = await fetch(`${API_URL}/api/contact`, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(form),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setStatus('success');
-        setForm({ name: '', email: '', subject: '', message: '' });
-        showToast('success', "Message sent! I'll reply within 24 hours ✓");
-        setTimeout(() => setStatus('idle'), 4000);
-      } else {
-        throw new Error(data.error || 'Something went wrong.');
-      }
+      const { error } = await supabase.from('messages').insert([{
+        name:    form.name.trim(),
+        email:   form.email.trim(),
+        subject: form.subject.trim() || null,
+        message: form.message.trim(),
+      }]);
+
+      if (error) throw new Error(error.message);
+
+      setStatus('success');
+      setForm({ name: '', email: '', subject: '', message: '' });
+      showToast('success', "Message sent! I'll reply within 24 hours ✓");
+      playSuccess();
+      setTimeout(() => setStatus('idle'), 4000);
     } catch (err) {
       setStatus('error');
       showToast('error', err.message || 'Failed to send. Please email me directly.');
@@ -176,7 +188,7 @@ export default function Contact() {
               </div>
               <div className="char-count font-mono">{form.message.length} characters</div>
               <button type="submit" className={`form-submit ${status}`}
-                disabled={status === 'sending' || status === 'success'} data-cursor-hover>
+                disabled={status === 'sending' || status === 'success'} data-cursor-hover data-magnetic="0.3">
                 {status === 'idle'    && <><span>Send Message</span><span className="btn-arrow">→</span></>}
                 {status === 'sending' && <><span className="spinner" /><span>Sending...</span></>}
                 {status === 'success' && <><span>✓ Message Sent!</span></>}
@@ -216,6 +228,8 @@ export default function Contact() {
                 type="button"
                 className="social-link"
                 data-cursor-hover
+                data-cursor-text="Chat"
+                data-magnetic="0.2"
                 onClick={() => setShowWhatsApp(true)}
               >
                 <span className="social-icon">💬</span>
@@ -231,6 +245,8 @@ export default function Contact() {
                   rel="noopener noreferrer"
                   className="social-link"
                   data-cursor-hover
+                  data-cursor-text="Open"
+                  data-magnetic="0.2"
                 >
                   <span className="social-icon">{icon}</span>
                   <span className="social-label">{label}</span>

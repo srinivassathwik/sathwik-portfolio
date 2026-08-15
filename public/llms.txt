@@ -1,0 +1,22 @@
+# Srinivas Sathwik Maddali
+
+> Software Developer & AI Automation Specialist based in Hyderabad, India.
+> Builds intelligent systems using Python, LLMs, automation, web scraping,
+> and full-stack development.
+
+## About
+- Portfolio: https://sathwik-portfolio-web.onrender.com/
+- Focus areas: AI automation, prompt engineering, LLM engineering, Python,
+  React, full-stack web development
+- Currently: Software Developer & AI Engineer at Aorzon Technologies
+- Location: Hyderabad, Telangana, India
+- Contact: srinivassathwikmaddali@gmail.com
+
+## Key sections
+- About: https://sathwik-portfolio-web.onrender.com/#about
+- Skills: https://sathwik-portfolio-web.onrender.com/#skills
+- Experience: https://sathwik-portfolio-web.onrender.com/#experience
+- Projects: https://sathwik-portfolio-web.onrender.com/#projects
+- Freelance services: https://sathwik-portfolio-web.onrender.com/#freelance
+- FAQ: https://sathwik-portfolio-web.onrender.com/#faq
+- Contact: https://sathwik-portfolio-web.onrender.com/#contact

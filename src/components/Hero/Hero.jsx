@@ -26,6 +26,7 @@ export default function Hero() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return; // canvas can be disabled by privacy extensions/browser settings — fail quietly instead of crashing
     let w = canvas.width  = window.innerWidth;
     let h = canvas.height = window.innerHeight;
     let mouse = { x: w / 2, y: h / 2 };
@@ -132,6 +133,10 @@ export default function Hero() {
 
       {/* Grid */}
       <div className="hero-grid" />
+
+      {/* Per-theme signature background flourish — styled entirely
+          via [data-theme] CSS in themes.css, nothing to configure here */}
+      <div className="hero-theme-fx" aria-hidden="true" />
       
 
       <div
@@ -295,7 +300,7 @@ export default function Hero() {
               src={profilePicUrl}
               isAdmin={isAdmin}
               onUpload={uploadPicture}
-              alt={personal.firstName}
+              alt={`${personal.name} — ${personal.taglines[0]}`}
               placeholder={
                 <div className="photo-icon">
                   <svg width="64" height="64" viewBox="0 0 64 64" fill="none">

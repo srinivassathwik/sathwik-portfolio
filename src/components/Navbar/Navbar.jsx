@@ -3,6 +3,7 @@
    ============================================================ */
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SoundToggle from '../SoundToggle/SoundToggle';
 import './Navbar.css';
 
 const links = [
@@ -11,6 +12,7 @@ const links = [
   { label: 'Skills',     href: '#skills'      },
   { label: 'Projects',   href: '#projects'    },
   { label: 'Freelance',  href: '#freelance'   },
+  { label: 'FAQ',        href: '#faq'         },
   { label: 'Contact',    href: '#contact'     },
 ];
 
@@ -63,15 +65,28 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* CTA */}
-        <a
-          href="#contact"
-          className="navbar-cta"
-          onClick={e => handleLink(e, '#contact')}
-          data-cursor-hover
-        >
-          Hire Me
-        </a>
+        {/* Sound + Command palette + CTA */}
+        <div className="navbar-actions">
+          <SoundToggle />
+          <button
+            className="navbar-cmdk"
+            onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
+            data-cursor-hover
+            data-cursor-text="Search"
+            aria-label="Open command palette"
+          >
+            <span>⌘</span>K
+          </button>
+          <a
+            href="#contact"
+            className="navbar-cta"
+            onClick={e => handleLink(e, '#contact')}
+            data-cursor-hover
+            data-magnetic="0.4"
+          >
+            Hire Me
+          </a>
+        </div>
 
         {/* Mobile toggle */}
         <button
