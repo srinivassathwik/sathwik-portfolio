@@ -18,7 +18,7 @@ export default function Hero() {
   const canvasRef = useRef(null);
   const { url: profilePicUrl, uploadPicture } = useProfilePicture();
   const { isAdmin } = useAdmin();
-  const { settings } = useSiteSettingsContext();
+  const { settings, reload: reloadSettings } = useSiteSettingsContext();
   const [editing, setEditing] = useState(false);
 
   /* ── Particle Constellation ───────────────────────────── */
@@ -255,7 +255,7 @@ export default function Hero() {
             </a>
 
             {isAdmin && (
-              <ResumeUploader />
+              <ResumeUploader onUploaded={reloadSettings} />
             )}
             <a href="#contact" className="cta-ghost" data-cursor-hover>
               Contact Me
